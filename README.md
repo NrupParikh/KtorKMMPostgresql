@@ -96,3 +96,18 @@ https://ktor.io/docs/creating-http-apis.html#source_code
 
 #### JACKSON
 - JSON Parser API provides easy way to convert JSON to POJO Object and supports easy conversion to Map from JSON data
+
+### Reference
+
+- Ktor
+https://ktor.io/
+
+- PostgreSQL
+https://www.postgresql.org/
+
+- Ktor with PostgreSQL, Hikari, Exposed and Jackson
+https://www.youtube.com/watch?v=dGln2gzdxq8
+
+- How to install PostgreSQL
+https://www.youtube.com/watch?v=IYHx0ovvxPs
+
