@@ -84,30 +84,37 @@ https://ktor.io/docs/creating-http-apis.html#source_code
 
 ### Postgresql + HIKARI + EXPOSED + JACKSON
 
-#### Postgresql
-- open source object-relational database
+#### Ktor [Web framework]
+- Ktor is the foundation upon which your web application is built. 
+- It provides a lightweight, asynchronous framework for handling HTTP requests and responses, routing, and managing the overall application lifecycle.
+- https://ktor.io/
 
-#### HIKARI
-- For Connection pooling and caching
-
-#### EXPOSED
-- Database persistance with exposed
-- Creating database and tables
-
-#### JACKSON
-- JSON Parser API provides easy way to convert JSON to POJO Object and supports easy conversion to Map from JSON data
-
-### Reference
-
-- Ktor
-https://ktor.io/
-
-- PostgreSQL
-https://www.postgresql.org/
-
+#### PostgreSQL [RDBMS]
+- PostgreSQL is a separate database system used to store and manage persistent data for your application.
+- Ktor doesn't directly interact with databases; it relies on other libraries like Exposed or JPA to handle database interactions.
+- https://www.postgresql.org/
 - Ktor with PostgreSQL, Hikari, Exposed and Jackson
-https://www.youtube.com/watch?v=dGln2gzdxq8
+- https://www.youtube.com/watch?v=dGln2gzdxq8
 
-- How to install PostgreSQL
-https://www.youtube.com/watch?v=IYHx0ovvxPs
+#### Hikari [Connection pooling library]
+- Hikari is used to manage connections to a database like PostgreSQL. 
+- It creates a pool of reusable connections, improving performance and efficiency by avoiding the overhead of creating new connections for each database interaction. 
+- Ktor can leverage Hikari to establish efficient database connections through Exposed or JPA.
+- How to install PostgreSQL : https://www.youtube.com/watch?v=IYHx0ovvxPs
 
+#### Exposed [Kotlin library for interacting with relational databases]
+- Exposed provides a Kotlin-friendly DSL (Domain Specific Language) for building database queries and interacting with relational databases like PostgreSQL.
+- It integrates with Ktor and Hikari to simplify database access within your application.
+
+#### Jackson [JSON serialization/deserialization library]
+- Jackson is a popular library for working with JSON data in Java applications. 
+- It can be used with Ktor for tasks like: Serializing data objects into JSON format for sending in responses.
+- Deserializing JSON data received in requests into corresponding Kotlin objects
+
+### Summary
+- Ktor acts as the core framework for your web application.
+- PostgreSQL is the database that stores your application's data.
+- Hikari manages connections to the database efficiently.
+- Exposed provides a Kotlin-friendly way to interact with the database.
+- Jackson helps in handling JSON data within your application.
+- These libraries work together to build a well-structured and efficient web application on the JVM platform.
