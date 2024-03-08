@@ -21,6 +21,8 @@ fun Application.authRoutes(repository: AuthRepository) {
                 call.respond(result.statusCode, result)
             }
 
+    // URL will be : http://127.0.01:8080/auth/login
+
             post("/login") {
                 val params = call.receive<UserLoginParams>()
                 val result = repository.loginUser(params)
