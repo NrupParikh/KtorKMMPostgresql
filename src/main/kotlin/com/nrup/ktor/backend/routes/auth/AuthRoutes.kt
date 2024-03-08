@@ -1,13 +1,13 @@
-package com.nrup.ktor.plugins
+package com.nrup.ktor.backend.routes.auth
 
-import com.nrup.ktor.backend.repository.UserRepository
-import com.nrup.ktor.backend.service.CreateUserParams
+import com.nrup.ktor.backend.repository.auth.AuthRepository
 import io.ktor.server.application.*
+import io.ktor.server.auth.*
 import io.ktor.server.request.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
 
-fun Application.authRoutes(repository: UserRepository) {
+fun Application.authRoutes(repository: AuthRepository) {
     val log = this.log
 
     // URL will be : http://127.0.01:8080/auth/register
@@ -20,7 +20,12 @@ fun Application.authRoutes(repository: UserRepository) {
                 val result = repository.registerUser(params)
                 call.respond(result.statusCode, result)
             }
-        }
 
+            post("/login") {
+                val params = call.receive<UserLoginParams>()
+                val result = repository.loginUser(params)
+                call.respond(result.statusCode, result)
+            }
+        }
     }
 }

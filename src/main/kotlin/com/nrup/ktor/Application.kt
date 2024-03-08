@@ -1,14 +1,19 @@
 package com.nrup.ktor
 
 
+import com.nrup.ktor.backend.config.configureContentNegotiation
+import com.nrup.ktor.backend.config.configureDatabase
+import com.nrup.ktor.backend.config.configureRouting
 import io.ktor.server.application.*
-import com.nrup.ktor.plugins.*
-import com.nrup.ktor.backend.db.DatabaseFactory
-import com.nrup.ktor.backend.repository.UserRepository
-import com.nrup.ktor.backend.repository.UserRepositoryImpl
+import com.nrup.ktor.backend.data.db.DatabaseFactory
+import com.nrup.ktor.backend.repository.auth.AuthRepository
+import com.nrup.ktor.backend.repository.auth.AuthRepositoryImpl
 import com.nrup.ktor.backend.security.configureSecurity
-import com.nrup.ktor.backend.service.UserService
-import com.nrup.ktor.backend.service.UserServiceImpl
+import com.nrup.ktor.backend.data.service.auth.AuthService
+import com.nrup.ktor.backend.data.service.auth.AuthServiceImpl
+import com.nrup.ktor.backend.routes.auth.authRoutes
+import com.nrup.ktor.plugins.configureMonitoring
+import com.nrup.ktor.plugins.configureSerialization
 import io.ktor.serialization.jackson.*
 import io.ktor.server.auth.*
 import io.ktor.server.engine.*
@@ -28,43 +33,12 @@ fun Application.module() {
 
 }*/
 
-fun main() {
 
-    // Netty : From io.ktor.server.netty run on port 8080 hosted on 127.0.01 machine
-
-    embeddedServer(Netty, port = 8080, host = "127.0.01") {
-
-        // Doing exposed.sql Database initialization with Hikari pooled DataSource
-        DatabaseFactory.init()
-
-        /*  ContentNegotiation : Negotiating media types between the client and server.
-            Serializing/deserializing the content in a specific format
-            Ktor supports : JSON, Jackson, XML, CBOR and ProtoBuf
-        */
-
-        install(ContentNegotiation) {
-            // We are using jackson for serialization and deserialization
-            jackson()
-        }
-
-        // SECURITY WITH JWT TOKEN
-        configureSecurity()
-
-        val service: UserService = UserServiceImpl()
-        val repository: UserRepository = UserRepositoryImpl(service)
-
-        // NAVIGATION
-        authRoutes(repository)
-
-        // ==================== just for testing that auth token working or not
-        // Put all APIs which required Auth Token will go inside this authenticate block
-        routing {
-            authenticate {
-                get("/testurl") {
-                    call.respond("working fine")
-                }
-            }
-        }
-    }.start(wait = true)
-
+fun main(args: Array<String>): Unit = EngineMain.main(args)
+@Suppress("unused")
+fun Application.module() {
+    configureDatabase()
+    configureContentNegotiation()
+    configureSecurity()
+    configureRouting()
 }

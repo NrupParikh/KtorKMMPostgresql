@@ -1,4 +1,4 @@
-package com.nrup.ktor.backend.service
+package com.nrup.ktor.backend.routes.auth
 
 data class CreateUserParams(
     val fullName: String,

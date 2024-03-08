@@ -1,6 +1,6 @@
-package com.nrup.ktor.backend.db
+package com.nrup.ktor.backend.data.db
 
-import com.nrup.ktor.backend.db.schema.UserTable
+import com.nrup.ktor.backend.data.db.schema.UserTable
 import com.zaxxer.hikari.HikariConfig
 import com.zaxxer.hikari.HikariDataSource
 import kotlinx.coroutines.Dispatchers

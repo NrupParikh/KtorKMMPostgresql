@@ -1,4 +1,4 @@
-package com.nrup.ktor.backend.db.schema
+package com.nrup.ktor.backend.data.db.schema
 
 import org.jetbrains.exposed.sql.Table
 import org.jetbrains.exposed.sql.javatime.datetime

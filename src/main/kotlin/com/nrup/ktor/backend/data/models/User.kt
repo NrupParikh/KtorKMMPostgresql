@@ -1,4 +1,4 @@
-package com.nrup.ktor.backend.models
+package com.nrup.ktor.backend.data.models
 
 data class User(
     val id: Int,
