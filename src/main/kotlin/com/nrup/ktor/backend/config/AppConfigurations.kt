@@ -7,17 +7,16 @@ import io.ktor.serialization.jackson.*
 import io.ktor.server.application.*
 import io.ktor.server.plugins.contentnegotiation.*
 
+// Doing exposed.sql Database initialization with Hikari pooled DataSource
 fun configureDatabase(){
-    // Doing exposed.sql Database initialization with Hikari pooled DataSource
     DatabaseFactory.init()
 }
 
+/*  ContentNegotiation : Negotiating media types between the client and server.
+     Serializing/deserializing the content in a specific format
+     Ktor supports : JSON, Jackson, XML, CBOR and ProtoBuf
+ */
 fun Application.configureContentNegotiation(){
-    /*  ContentNegotiation : Negotiating media types between the client and server.
-         Serializing/deserializing the content in a specific format
-         Ktor supports : JSON, Jackson, XML, CBOR and ProtoBuf
-     */
-
     install(ContentNegotiation) {
         // We are using jackson for serialization and deserialization
         jackson()

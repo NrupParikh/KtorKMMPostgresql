@@ -11,7 +11,7 @@ import org.jetbrains.exposed.sql.transactions.transaction
 
 object DatabaseFactory {
     fun init() {
-        // Connecting database hikari
+        // Connecting database with hikari data source
         Database.connect(hikari())
 
         // Creating table
