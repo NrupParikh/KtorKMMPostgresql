@@ -3,6 +3,7 @@ package com.nrup.ktor.backend.service
 import com.nrup.ktor.backend.db.DatabaseFactory.dbQuery
 import com.nrup.ktor.backend.db.schema.UserTable
 import com.nrup.ktor.backend.models.User
+import com.nrup.ktor.backend.security.hash
 import org.jetbrains.exposed.sql.ResultRow
 import org.jetbrains.exposed.sql.insert
 import org.jetbrains.exposed.sql.select
@@ -14,7 +15,8 @@ class UserServiceImpl : UserService {
         dbQuery {
             statement = UserTable.insert {
                 it[email] = params.email
-                it[password] = params.password
+                // Storing encrypted password
+                it[password] = hash(params.password)
                 it[fullName] = params.fullName
                 it[avatar] = params.avatar
             }

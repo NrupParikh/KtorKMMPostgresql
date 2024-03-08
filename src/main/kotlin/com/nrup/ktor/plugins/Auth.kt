@@ -9,6 +9,9 @@ import io.ktor.server.routing.*
 
 fun Application.authRoutes(repository: UserRepository) {
     val log = this.log
+
+    // URL will be : http://127.0.01:8080/auth/register
+
     routing {
         route("/auth") {
             post("/register") {

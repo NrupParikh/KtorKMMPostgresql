@@ -11,11 +11,17 @@ import org.jetbrains.exposed.sql.transactions.transaction
 
 object DatabaseFactory {
     fun init() {
+        // Connecting database hikari
         Database.connect(hikari())
+
+        // Creating table
         transaction {
             SchemaUtils.create(UserTable)
         }
     }
+
+    // HikariDataSource is a connection pool implementation for Java applications
+    // that simplifies managing database connections
 
     private fun hikari(): HikariDataSource {
         val config = HikariConfig()
