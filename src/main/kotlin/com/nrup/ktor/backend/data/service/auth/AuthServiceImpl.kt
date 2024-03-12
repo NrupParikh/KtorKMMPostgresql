@@ -1,9 +1,9 @@
 package com.nrup.ktor.backend.data.service.auth
 
+import AuthResponseData
 import SignUpParams
 import com.nrup.ktor.backend.data.db.DatabaseFactory.dbQuery
 import com.nrup.ktor.backend.data.db.schema.UserTable
-import com.nrup.ktor.backend.data.models.User
 import com.nrup.ktor.backend.security.hash
 import org.jetbrains.exposed.sql.ResultRow
 import org.jetbrains.exposed.sql.and
@@ -12,7 +12,7 @@ import org.jetbrains.exposed.sql.select
 import org.jetbrains.exposed.sql.statements.InsertStatement
 
 class AuthServiceImpl : AuthService {
-    override suspend fun registerUser(params: SignUpParams): User? {
+    override suspend fun registerUser(params: SignUpParams): AuthResponseData? {
         var statement: InsertStatement<Number>? = null
         return dbQuery {
             statement = UserTable.insert {
@@ -27,7 +27,7 @@ class AuthServiceImpl : AuthService {
         }
     }
 
-    override suspend fun findUserByEmail(params: String): User? {
+    override suspend fun findUserByEmail(params: String): AuthResponseData? {
         return dbQuery {
             UserTable.select {
                 UserTable.email.eq(params)
@@ -37,7 +37,7 @@ class AuthServiceImpl : AuthService {
         }
     }
 
-    override suspend fun loginUser(email: String, password: String): User? {
+    override suspend fun loginUser(email: String, password: String): AuthResponseData? {
         val hashedPassword = hash(password)
         val userRow = dbQuery {
             UserTable.select { UserTable.email eq email and (UserTable.password eq hashedPassword) }.firstOrNull()
@@ -47,9 +47,9 @@ class AuthServiceImpl : AuthService {
 
 
     // Return the response
-    private fun rowToUser(row: ResultRow?): User? {
+    private fun rowToUser(row: ResultRow?): AuthResponseData? {
         return if (row == null) null
-        else User(
+        else AuthResponseData(
             id = row[UserTable.id],
             fullName = row[UserTable.fullName],
             email = row[UserTable.email],
