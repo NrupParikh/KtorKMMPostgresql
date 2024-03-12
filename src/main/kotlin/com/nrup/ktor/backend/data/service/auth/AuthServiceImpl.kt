@@ -1,10 +1,10 @@
 package com.nrup.ktor.backend.data.service.auth
 
+import SignUpParams
 import com.nrup.ktor.backend.data.db.DatabaseFactory.dbQuery
 import com.nrup.ktor.backend.data.db.schema.UserTable
 import com.nrup.ktor.backend.data.models.User
 import com.nrup.ktor.backend.security.hash
-import com.nrup.ktor.backend.routes.auth.CreateUserParams
 import org.jetbrains.exposed.sql.ResultRow
 import org.jetbrains.exposed.sql.and
 import org.jetbrains.exposed.sql.insert
@@ -12,33 +12,36 @@ import org.jetbrains.exposed.sql.select
 import org.jetbrains.exposed.sql.statements.InsertStatement
 
 class AuthServiceImpl : AuthService {
-    override suspend fun registerUser(params: CreateUserParams): User? {
+    override suspend fun registerUser(params: SignUpParams): User? {
         var statement: InsertStatement<Number>? = null
-        dbQuery {
+        return dbQuery {
             statement = UserTable.insert {
                 it[email] = params.email
                 // Storing encrypted password
                 it[password] = hash(params.password)
                 it[fullName] = params.fullName
             }
+            statement?.resultedValues?.singleOrNull()?.let {
+                rowToUser(it)
+            }
         }
-        return rowToUser(statement?.resultedValues?.get(0))
     }
 
-    override suspend fun findUserByEmail(emailId: String): User? {
-        val user = dbQuery {
+    override suspend fun findUserByEmail(params: String): User? {
+        return dbQuery {
             UserTable.select {
-                UserTable.email.eq(emailId)
+                UserTable.email.eq(params)
             }.map {
                 rowToUser(it)
             }.singleOrNull()
         }
-        return user
     }
 
     override suspend fun loginUser(email: String, password: String): User? {
         val hashedPassword = hash(password)
-        val userRow = dbQuery { UserTable.select { UserTable.email eq email and (UserTable.password eq hashedPassword) }.firstOrNull() }
+        val userRow = dbQuery {
+            UserTable.select { UserTable.email eq email and (UserTable.password eq hashedPassword) }.firstOrNull()
+        }
         return rowToUser(userRow)
     }
 

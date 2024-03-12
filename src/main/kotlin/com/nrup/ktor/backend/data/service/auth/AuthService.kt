@@ -1,10 +1,10 @@
 package com.nrup.ktor.backend.data.service.auth
 
+import SignUpParams
 import com.nrup.ktor.backend.data.models.User
-import com.nrup.ktor.backend.routes.auth.CreateUserParams
 
 interface AuthService {
-    suspend fun registerUser(params: CreateUserParams): User?
+    suspend fun registerUser(params: SignUpParams): User?
     suspend fun findUserByEmail(params: String): User?
     suspend fun loginUser(email: String, password: String): User?
 }

@@ -1,10 +1,11 @@
 package com.nrup.ktor.backend.repository.auth
 
-import com.nrup.ktor.backend.routes.auth.CreateUserParams
-import com.nrup.ktor.backend.routes.auth.UserLoginParams
+import AuthResponse
+import SignInParams
+import SignUpParams
 import com.nrup.ktor.backend.base.BaseResponse
 
 interface AuthRepository {
-    suspend fun registerUser(params: CreateUserParams): BaseResponse<Any>
-    suspend fun loginUser(params: UserLoginParams): BaseResponse<Any>
+    suspend fun registerUser(params: SignUpParams): BaseResponse<AuthResponse>
+    suspend fun loginUser(params: SignInParams): BaseResponse<AuthResponse>
 }

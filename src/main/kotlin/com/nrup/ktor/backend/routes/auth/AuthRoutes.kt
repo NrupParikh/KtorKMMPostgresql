@@ -1,6 +1,10 @@
 package com.nrup.ktor.backend.routes.auth
 
+import AuthResponse
+import SignInParams
+import SignUpParams
 import com.nrup.ktor.backend.repository.auth.AuthRepository
+import io.ktor.http.*
 import io.ktor.server.application.*
 import io.ktor.server.request.*
 import io.ktor.server.response.*
@@ -15,17 +19,38 @@ fun Application.authRoutes(repository: AuthRepository) {
         route("/auth") {
             post("/register") {
                 log.info("Received registration request: $call")
-                val params = call.receive<CreateUserParams>()
+                val params = call.receiveNullable<SignUpParams>()
+                if (params == null) {
+                    call.respond(
+                        status = HttpStatusCode.BadRequest,
+                        message = AuthResponse(
+                            errorMessage = "Invalid credentials"
+                        )
+                    )
+                    return@post
+                }
+
                 val result = repository.registerUser(params)
-                call.respond(result.statusCode, result)
+                call.respond(status = result.statusCode, message = result.data)
             }
 
             // URL will be : http://127.0.01:8080/auth/login
 
             post("/login") {
-                val params = call.receive<UserLoginParams>()
+                log.info("Received login request: $call")
+                val params = call.receiveNullable<SignInParams>()
+                if (params == null) {
+                    call.respond(
+                        status = HttpStatusCode.BadRequest,
+                        message = AuthResponse(
+                            errorMessage = "Invalid credentials"
+                        )
+                    )
+                    return@post
+                }
+
                 val result = repository.loginUser(params)
-                call.respond(result.statusCode, result)
+                call.respond(status = result.statusCode, message = result.data)
             }
         }
     }
