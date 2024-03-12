@@ -4,6 +4,7 @@ package com.nrup.ktor
 import com.nrup.ktor.backend.config.configureContentNegotiation
 import com.nrup.ktor.backend.config.configureDatabase
 import com.nrup.ktor.backend.config.configureRouting
+import com.nrup.ktor.backend.config.configureStatusPages
 import io.ktor.server.application.*
 import com.nrup.ktor.backend.data.db.DatabaseFactory
 import com.nrup.ktor.backend.repository.auth.AuthRepository
@@ -34,11 +35,26 @@ fun Application.module() {
 }*/
 
 
-fun main(args: Array<String>): Unit = EngineMain.main(args)
-@Suppress("unused")
-fun Application.module() {
-    configureDatabase()
-    configureContentNegotiation()
-    configureSecurity()
-    configureRouting()
+//fun main(args: Array<String>): Unit = EngineMain.main(args)
+//@Suppress("unused")
+//fun Application.module() {
+//    configureDatabase()
+//    configureContentNegotiation()
+//    configureSecurity()
+//    configureRouting()
+//}
+
+fun main() {
+
+    // Netty : From io.ktor.server.netty run on port 8080 hosted on 127.0.01 machine
+
+    embeddedServer(Netty, port = 8080, host = "10.37.54.125") {
+
+        configureDatabase()
+        configureContentNegotiation()
+//        configureStatusPages()
+        configureSecurity()
+        configureRouting()
+
+    }.start(wait = true)
 }

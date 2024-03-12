@@ -22,8 +22,8 @@ class JWTConfig private constructor(secret: String) {
             .sign(algorithm)
 
     companion object {
-        private const val ISSUER = "my-ktor-app"
-        private const val AUDIANCE = "my-ktor-app"
+        private const val ISSUER = "my-db"
+        private const val AUDIANCE = "my-db"
         const val CLAM = "id"
 
         // Initialize the JWT configuration because our constructor is private

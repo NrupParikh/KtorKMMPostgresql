@@ -28,7 +28,7 @@ object DatabaseFactory {
         config.driverClassName = "org.postgresql.Driver"
 
         // myktorapp is database name
-        config.jdbcUrl = "jdbc:postgresql:myktorapp"
+        config.jdbcUrl = "jdbc:postgresql:mydb"
 
         // Define credential for my pgAdmin [postgres]
         config.username = "postgres"

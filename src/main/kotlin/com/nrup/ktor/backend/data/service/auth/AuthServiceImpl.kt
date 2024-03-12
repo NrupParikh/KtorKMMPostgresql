@@ -20,7 +20,6 @@ class AuthServiceImpl : AuthService {
                 // Storing encrypted password
                 it[password] = hash(params.password)
                 it[fullName] = params.fullName
-                it[avatar] = params.avatar
             }
         }
         return rowToUser(statement?.resultedValues?.get(0))
@@ -50,7 +49,6 @@ class AuthServiceImpl : AuthService {
         else User(
             id = row[UserTable.id],
             fullName = row[UserTable.fullName],
-            avatar = row[UserTable.avatar],
             email = row[UserTable.email],
             createdAt = row[UserTable.createdAt].toString(),
         )

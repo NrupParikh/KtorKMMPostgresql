@@ -6,7 +6,7 @@ import io.ktor.server.auth.jwt.*
 
 fun Application.configureSecurity() {
 
-    JWTConfig.initialize("my-ktor-app")
+    JWTConfig.initialize("my-db")
     install(Authentication) {
         jwt {
             verifier(JWTConfig.instance.verifier)
