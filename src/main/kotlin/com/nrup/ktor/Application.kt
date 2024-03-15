@@ -8,27 +8,6 @@ import com.nrup.ktor.backend.security.configureSecurity
 import io.ktor.server.engine.*
 import io.ktor.server.netty.*
 
-/*fun main(args: Array<String>): Unit =
-    EngineMain.main(args)
-
-@Suppress("unused") // application.conf references the main function. This annotation prevents the IDE from marking it as unused.
-fun Application.module() {
-    configureSerialization()
-    configureMonitoring()
-    configureRouting()
-
-}*/
-
-
-//fun main(args: Array<String>): Unit = EngineMain.main(args)
-//@Suppress("unused")
-//fun Application.module() {
-//    configureDatabase()
-//    configureContentNegotiation()
-//    configureSecurity()
-//    configureRouting()
-//}
-
 fun main() {
 
     // Netty : From io.ktor.server.netty run on port 8080 hosted on 127.0.01 machine
@@ -37,7 +16,6 @@ fun main() {
 
         configureDatabase()
         configureContentNegotiation()
-//        configureStatusPages()
         configureSecurity()
         configureRouting()
 
