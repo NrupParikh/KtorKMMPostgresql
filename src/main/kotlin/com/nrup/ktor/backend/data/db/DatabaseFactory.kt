@@ -1,5 +1,6 @@
 package com.nrup.ktor.backend.data.db
 
+import com.nrup.ktor.backend.data.db.schema.PostTable
 import com.nrup.ktor.backend.data.db.schema.UserTable
 import com.zaxxer.hikari.HikariConfig
 import com.zaxxer.hikari.HikariDataSource
@@ -17,6 +18,7 @@ object DatabaseFactory {
         // Creating table
         transaction {
             SchemaUtils.create(UserTable)
+            SchemaUtils.create(PostTable)
         }
     }
 

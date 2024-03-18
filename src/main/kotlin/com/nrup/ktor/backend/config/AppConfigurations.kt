@@ -3,6 +3,7 @@ package com.nrup.ktor.backend.config
 import com.nrup.ktor.backend.data.db.DatabaseFactory
 import com.nrup.ktor.backend.di.RepositoryProvider
 import com.nrup.ktor.backend.routes.auth.authRoutes
+import com.nrup.ktor.backend.routes.post.postRoutes
 import io.ktor.serialization.jackson.*
 import io.ktor.server.application.*
 import io.ktor.server.plugins.contentnegotiation.*
@@ -25,4 +26,5 @@ fun Application.configureContentNegotiation(){
 
 fun Application.configureRouting(){
     authRoutes(RepositoryProvider.provideAuthRepository())
+    postRoutes(RepositoryProvider.providePostRepository())
 }
