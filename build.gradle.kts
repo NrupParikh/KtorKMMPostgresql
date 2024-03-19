@@ -61,3 +61,19 @@ dependencies {
     testImplementation("io.ktor:ktor-server-tests-jvm:$ktor_version")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version")
 }
+
+
+tasks.register<Jar>("fatJar") {
+    archiveBaseName.set(project.name)
+    from(configurations.runtimeClasspath)
+    val sources = sourceSets.main.get().output.filter { it.isDirectory } // Filter only directories (optional)
+    from(sources.map { zipTree(it) })
+    manifest {
+        attributes(
+            mapOf(
+                "KtorKMM" to project.name,
+                "Main-Class" to "com.nrup.ktor.Application" // Replace with your main class
+            )
+        )
+    }
+}
