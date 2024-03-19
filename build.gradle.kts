@@ -49,6 +49,7 @@ dependencies {
     // Hikari : Creating JDBC Database Connection Pool
     implementation("com.zaxxer:HikariCP:$hikaricp_version")
 
+
     // Status Page
     implementation("io.ktor:ktor-server-status-pages:$ktor_version")
 
