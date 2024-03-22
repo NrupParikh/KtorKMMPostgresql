@@ -32,6 +32,9 @@ dependencies {
     // Content Negotiation
     implementation("io.ktor:ktor-server-content-negotiation-jvm:$ktor_version")
 
+    // Call logging
+    implementation("io.ktor:ktor-server-call-logging-jvm:$ktor_version")
+
     // For serialization / deserialization of JSON objects using Jackson
     implementation("io.ktor:ktor-serialization-jackson:$ktor_version")
 
@@ -45,14 +48,11 @@ dependencies {
     implementation("org.jetbrains.exposed:exposed-jdbc:$exposed_version")
     implementation("org.jetbrains.exposed:exposed-java-time:$exposed_version")
 
-    // Postgrey SQL (RDBMS)
-    implementation("org.postgresql:postgresql:$postgrey_sql_version")
-
     // Hikari : Creating JDBC Database Connection Pool
     implementation("com.zaxxer:HikariCP:$hikaricp_version")
 
-    // Call logging
-    implementation("io.ktor:ktor-server-call-logging-jvm:$ktor_version")
+    // Postgrey SQL (RDBMS)
+    implementation("org.postgresql:postgresql:$postgrey_sql_version")
 
     implementation("io.ktor:ktor-server-host-common-jvm:$ktor_version")
     implementation("ch.qos.logback:logback-classic:$logback_version")
