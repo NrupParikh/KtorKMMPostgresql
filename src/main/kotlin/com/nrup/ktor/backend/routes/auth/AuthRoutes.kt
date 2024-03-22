@@ -19,7 +19,7 @@ fun Application.authRoutes(repository: AuthRepository) {
     routing {
         route("/auth") {
             post("/register") {
-                log.info("Received registration request: $call")
+//                log.info("Received registration request: $call")
                 val params = call.receiveNullable<SignUpParams>()
                 if (params == null) {
                     call.respond(
@@ -57,7 +57,8 @@ fun Application.authRoutes(repository: AuthRepository) {
 
         /*
             Testing JWT Token working or not
-            API listed below the authenticate block required JWT token in header or throw error
+            API listed below the authenticate block required
+            JWT token in header or throw error
             401 : Unauthorized
         */
 

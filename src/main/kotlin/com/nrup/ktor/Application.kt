@@ -3,8 +3,10 @@ package com.nrup.ktor
 
 import com.nrup.ktor.backend.config.configureContentNegotiation
 import com.nrup.ktor.backend.config.configureDatabase
+import com.nrup.ktor.backend.config.configureMonitoring
 import com.nrup.ktor.backend.config.configureRouting
 import com.nrup.ktor.backend.security.configureSecurity
+import io.ktor.http.*
 import io.ktor.server.application.*
 import io.ktor.server.engine.*
 import io.ktor.server.netty.*
@@ -19,7 +21,7 @@ fun main() {
 //    ){
 //        routing {
 //            get("/my_api"){
-//                call.respond("Hello, world! how are you")
+//                call.respondText("Hello, world! how are you", contentType = ContentType.Text.JavaScript)
 //            }
 //        }
 //    }.start(wait = true)
@@ -41,6 +43,8 @@ fun Application.module() {
 
     // Database and Table creation and connection
     configureDatabase()
+
+    configureMonitoring()
 
     // Content negotiation between client-server (serialization and deserialization)
     configureContentNegotiation()
