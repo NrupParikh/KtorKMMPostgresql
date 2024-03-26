@@ -1,6 +1,5 @@
 package com.nrup.ktor.backend.data.db
 
-import com.nrup.ktor.backend.data.db.schema.PostTable
 import com.nrup.ktor.backend.data.db.schema.UserTable
 import com.zaxxer.hikari.HikariConfig
 import com.zaxxer.hikari.HikariDataSource
@@ -18,7 +17,6 @@ object DatabaseFactory {
         // Creating table
         transaction {
             SchemaUtils.create(UserTable)
-            SchemaUtils.create(PostTable)
         }
     }
 
@@ -39,7 +37,7 @@ object DatabaseFactory {
         config.isAutoCommit = false
         config.transactionIsolation = "TRANSACTION_REPEATABLE_READ"
         config.validate()
-            return HikariDataSource(config)
+        return HikariDataSource(config)
     }
 
     suspend fun <T> dbQuery(block: () -> T): T = withContext(Dispatchers.IO) {
