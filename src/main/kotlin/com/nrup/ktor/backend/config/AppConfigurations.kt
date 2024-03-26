@@ -5,12 +5,9 @@ import com.nrup.ktor.backend.di.RepositoryProvider
 import com.nrup.ktor.backend.routes.auth.authRoutes
 import com.nrup.ktor.backend.routes.post.postRoutes
 import io.ktor.serialization.jackson.*
-import io.ktor.serialization.kotlinx.json.*
 import io.ktor.server.application.*
 import io.ktor.server.plugins.callloging.*
 import io.ktor.server.plugins.contentnegotiation.*
-import io.ktor.server.request.*
-import org.slf4j.Logger
 import org.slf4j.event.Level
 
 // Doing exposed.sql Database initialization with Hikari pooled DataSource
