@@ -35,7 +35,7 @@ object DatabaseFactory {
         // Define credential for my pgAdmin [postgres]
         config.username = "postgres"
         config.password = "1234"
-        config.maximumPoolSize = 3
+        config.maximumPoolSize = 3 // maximum number of connections that the connection pool can hold
         config.isAutoCommit = false
         config.transactionIsolation = "TRANSACTION_REPEATABLE_READ"
         config.validate()

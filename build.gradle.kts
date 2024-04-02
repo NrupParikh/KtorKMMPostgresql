@@ -27,6 +27,7 @@ repositories {
 dependencies {
     // Ktor
     implementation("io.ktor:ktor-server-core-jvm:$ktor_version")
+    // Netty Engine
     implementation("io.ktor:ktor-server-netty-jvm:$ktor_version")
 
     // Content Negotiation

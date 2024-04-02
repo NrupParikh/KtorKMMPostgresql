@@ -17,23 +17,24 @@ fun main() {
     // ========================= SAMPLE
 //    embeddedServer(
 //        Netty,
+//        host = "10.37.54.125",
 //        port = 8080
 //    ){
 //        routing {
 //            get("/my_api"){
-//                call.respondText("Hello, world! how are you", contentType = ContentType.Text.JavaScript)
+//                call.respondText("Hello, world! how are you", contentType = ContentType.Text.Plain)
 //            }
 //        }
 //    }.start(wait = true)
 
     // ============================================
 
-    // Netty : From io.ktor.server.netty run on port 8080 hosted on 127.0.01 machine
-
+    // An embedded server is a lightweight web server that is bundled directly within your application
+    // Netty : From io.ktor.server.netty run on port 8080 hosted on 127.0.01  machine
     embeddedServer(
         Netty,
         port = 8080,
-        host = "10.37.54.125",
+        host = "10.37.54.125", // IPV4 address
         module = Application::module
     ).start(wait = true)
 
