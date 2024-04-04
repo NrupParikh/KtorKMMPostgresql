@@ -1,5 +1,6 @@
 package com.nrup.ktor.backend.routes.post
 
+import com.nrup.ktor.backend.constants.APIConstants
 import com.nrup.ktor.backend.repository.post.PostRepository
 import io.ktor.http.*
 import io.ktor.server.application.*
@@ -11,17 +12,17 @@ import io.ktor.server.routing.*
 fun Application.postRoutes(repository: PostRepository) {
     val log = this.log
     routing {
-        route("/post") {
+        route(APIConstants.routePost) {
 
             // =========== CREATE POST
-            post("/createPost") {
+            post(APIConstants.pathCreatePost) {
                 log.info("Received create post request: $call")
                 val params = call.receiveNullable<PostParams>()
                 if (params == null) {
                     call.respond(
                         status = HttpStatusCode.BadRequest,
                         message = PostResponse(
-                            errorMessage = "Invalid credentials"
+                            errorMessage = APIConstants.msgInvalidCredentials
                         )
                     )
                     return@post
@@ -32,7 +33,7 @@ fun Application.postRoutes(repository: PostRepository) {
 
             // =========== GET ALL POST
             authenticate {
-                get("/getAllPost") {
+                get(APIConstants.pathGetAllPost) {
                     log.info("Received get all post request: $call")
                     val result = repository.getAllPost()
                     call.respond(status = result.statusCode, message = result.data)

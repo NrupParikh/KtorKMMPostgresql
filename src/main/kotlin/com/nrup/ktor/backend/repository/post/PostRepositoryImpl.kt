@@ -1,6 +1,7 @@
 package com.nrup.ktor.backend.repository.post
 
 import com.nrup.ktor.backend.base.BaseResponse
+import com.nrup.ktor.backend.constants.APIConstants
 import com.nrup.ktor.backend.data.service.post.PostService
 import com.nrup.ktor.backend.routes.post.PostListResponse
 import com.nrup.ktor.backend.routes.post.PostParams
@@ -19,7 +20,7 @@ class PostRepositoryImpl(
         } else {
             BaseResponse.ErrorResponse(
                 code = HttpStatusCode.InternalServerError,
-                data = PostResponse(errorMessage = "Something went wrong")
+                data = PostResponse(errorMessage = APIConstants.msgSomethingWentWrong)
             )
         }
     }
@@ -36,7 +37,7 @@ class PostRepositoryImpl(
         } else {
             BaseResponse.ErrorResponse(
                 code = HttpStatusCode.OK,
-                data = PostListResponse(data = emptyList(), errorMessage = "No post found")
+                data = PostListResponse(data = emptyList(), errorMessage = APIConstants.msgNoPostFound)
             )
 
         }

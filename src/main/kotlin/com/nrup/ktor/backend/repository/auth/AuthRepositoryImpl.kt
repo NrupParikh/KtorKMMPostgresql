@@ -6,6 +6,7 @@ import SignUpParams
 import com.nrup.ktor.backend.security.JWTConfig
 import com.nrup.ktor.backend.data.service.auth.AuthService
 import com.nrup.ktor.backend.base.BaseResponse
+import com.nrup.ktor.backend.constants.APIConstants
 import io.ktor.http.*
 
 class AuthRepositoryImpl(
@@ -15,7 +16,7 @@ class AuthRepositoryImpl(
         return if (isEmailExist(params.email)) {
             BaseResponse.ErrorResponse(
                 code = HttpStatusCode.Conflict,
-                data = AuthResponse(errorMessage = "User already exist")
+                data = AuthResponse(errorMessage = APIConstants.msgUserAlreadyExist)
             )
         } else {
             val user = userService.registerUser(params)
@@ -26,7 +27,7 @@ class AuthRepositoryImpl(
             } else {
                 BaseResponse.ErrorResponse(
                     code = HttpStatusCode.InternalServerError,
-                    data = AuthResponse(errorMessage = "Something went wrong")
+                    data = AuthResponse(errorMessage = APIConstants.msgSomethingWentWrong)
                 )
             }
         }
@@ -42,7 +43,7 @@ class AuthRepositoryImpl(
         } else {
             BaseResponse.ErrorResponse(
                 code = HttpStatusCode.Forbidden,
-                data = AuthResponse(errorMessage = "Invalid credentials")
+                data = AuthResponse(errorMessage = APIConstants.msgInvalidCredentials)
             )
         }
     }
