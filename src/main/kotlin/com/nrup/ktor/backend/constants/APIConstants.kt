@@ -11,6 +11,11 @@ class APIConstants {
         const val msgInvalidPassword = "Password must be 6 character long"
         const val msgUserAlreadyExist = "User already exist"
 
+        const val msgEnterPostTitle = "Please enter Post title"
+        const val msgEnterImageUrl = "Please enter Image URL"
+        const val msgEnterValidImageUrl = "Please enter valid Image URL"
+
+
         // General messages
         const val msgInvalidCredentials = "Invalid credentials"
         const val msgSomethingWentWrong = "Something went wrong"

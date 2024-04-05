@@ -1,6 +1,7 @@
 package com.nrup.ktor.backend.routes.post
 
 import com.nrup.ktor.backend.constants.APIConstants
+import com.nrup.ktor.backend.constants.AppConstants
 import com.nrup.ktor.backend.repository.post.PostRepository
 import io.ktor.http.*
 import io.ktor.server.application.*
@@ -23,6 +24,31 @@ fun Application.postRoutes(repository: PostRepository) {
                         status = HttpStatusCode.BadRequest,
                         message = PostResponse(
                             errorMessage = APIConstants.msgInvalidCredentials
+                        )
+                    )
+                    return@post
+                }
+                else if (params.title.isEmpty()) {
+                    call.respond(
+                        status = HttpStatusCode.BadRequest,
+                        message = PostResponse(
+                            errorMessage = APIConstants.msgEnterPostTitle
+                        )
+                    )
+                    return@post
+                }  else if (params.imageUrl.isEmpty()) {
+                    call.respond(
+                        status = HttpStatusCode.BadRequest,
+                        message = PostResponse(
+                            errorMessage = APIConstants.msgEnterImageUrl
+                        )
+                    )
+                    return@post
+                } else if(AppConstants.isValidURL(params.imageUrl).not()){
+                    call.respond(
+                        status = HttpStatusCode.BadRequest,
+                        message = PostResponse(
+                            errorMessage = APIConstants.msgEnterValidImageUrl
                         )
                     )
                     return@post
